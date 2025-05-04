@@ -1,2 +1,3 @@
 # calculator-project
-a cool calcy :)
+
+LINK - https://www.theodinproject.com/lessons/foundations-calculator
