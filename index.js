@@ -29,3 +29,40 @@ function divide(x, y) {
   }
   return x / y;
 }
+
+// When DOM is loaded...
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector("#container");
+  const calculator = document.querySelector("#calculator");
+  const display = document.querySelector("#display");
+  const buttons = document.querySelector("#buttons");
+
+  const buttonLabels = [
+    "7",
+    "8",
+    "9",
+    "/",
+    "4",
+    "5",
+    "6",
+    "*",
+    "1",
+    "2",
+    "3",
+    "-",
+    "0",
+    ".",
+    "=",
+    "+",
+  ];
+
+  buttonLabels.forEach(label => {
+    const btn = document.createElement("button");
+    btn.textContent = label;
+    buttons.appendChild(btn);
+  });
+
+  //   calculator.appendChild(display);
+  //   calculator.appendChild(buttonsContainer);
+  //   container.appendChild(calculator);
+});
