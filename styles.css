@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+#calculator {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 600px;
+}
+
+#display {
+  display: flex;
+  height: 50px;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+#buttons button {
+  height: 50px;
+}
