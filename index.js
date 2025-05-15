@@ -1,5 +1,3 @@
-let operator1, operator2, operand;
-
 function operate(x, op, y) {
   switch (op) {
     case "+":
@@ -30,6 +28,9 @@ function divide(x, y) {
   return x / y;
 }
 
+let operator1 = null;
+let operator2 = null;
+let operand = null;
 // When DOM is loaded...
 document.addEventListener("DOMContentLoaded", () => {
   const container = document.querySelector("#container");
@@ -50,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "2",
     "3",
     "-",
+    "AC",
     "0",
-    ".",
     "=",
     "+",
   ];
@@ -60,6 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.createElement("button");
     btn.textContent = label;
     buttons.appendChild(btn);
+
+    btn.addEventListener("click", () => {
+      if (!isNaN(label)) {
+        display.value += label;
+      }
+    });
   });
 
   //   calculator.appendChild(display);
