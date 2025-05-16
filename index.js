@@ -39,27 +39,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelector("#buttons");
 
   const buttonLabels = [
+    "AC",
+    "+/-",
+    "%",
+    "/",
     "7",
     "8",
     "9",
-    "/",
+    "*",
     "4",
     "5",
     "6",
-    "*",
+    "-",
     "1",
     "2",
     "3",
-    "-",
-    "AC",
-    "0",
-    "=",
     "+",
+    "0",
+    ".",
+    "=",
   ];
 
   buttonLabels.forEach(label => {
     const btn = document.createElement("button");
     btn.textContent = label;
+
+    if (label === "0") {
+      btn.classList.add("zero-btn");
+    }
 
     btn.addEventListener("click", () => {
       if (!isNaN(label)) {
