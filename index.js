@@ -78,16 +78,28 @@ document.addEventListener("DOMContentLoaded", () => {
         operator2 = null;
       } else if (label === "=") {
         if (operator1 !== null && operand !== null) {
-          operator2 = parseInt(display.value);
+          operator2 = parseFloat(display.value);
           const result = operate(operator1, operand, operator2);
           display.value = result;
           operator1 = result;
           operand = null;
         }
+      } else if (label === "+/-") {
+        if (display.value !== "") {
+          display.value = (parseFloat(display.value) * -1).toString();
+        }
+      } else if (label === "%") {
+        if (display.value !== "") {
+          display.value = (parseFloat(display.value) / 100).toString();
+        }
+      } else if (label === ".") {
+        if (!display.value.includes(".")) {
+          display.value += ".";
+        }
       } else {
         if (display.value !== "") {
           // Value in display becomes operator1
-          operator1 = parseInt(display.value);
+          operator1 = parseFloat(display.value);
           // When operand is clicked (+,-,*,/)
           operand = label;
           // Clear display for next operator2
