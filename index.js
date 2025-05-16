@@ -60,13 +60,35 @@ document.addEventListener("DOMContentLoaded", () => {
   buttonLabels.forEach(label => {
     const btn = document.createElement("button");
     btn.textContent = label;
-    buttons.appendChild(btn);
 
     btn.addEventListener("click", () => {
       if (!isNaN(label)) {
         display.value += label;
+      } else if (label === "AC") {
+        display.value = "";
+        operand = null;
+        operator1 = null;
+        operator2 = null;
+      } else if (label === "=") {
+        if (operator1 !== null && operand !== null) {
+          operator2 = parseInt(display.value);
+          const result = operate(operator1, operand, operator2);
+          display.value = result;
+          operator1 = result;
+          operand = null;
+        }
+      } else {
+        if (display.value !== "") {
+          // Value in display becomes operator1
+          operator1 = parseInt(display.value);
+          // When operand is clicked (+,-,*,/)
+          operand = label;
+          // Clear display for next operator2
+          display.value = "";
+        }
       }
     });
+    buttons.appendChild(btn);
   });
 
   //   calculator.appendChild(display);
