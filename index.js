@@ -4,7 +4,7 @@ function operate(x, op, y) {
       return add(x, y);
     case "-":
       return subtract(x, y);
-    case "*":
+    case "x":
       return multiply(x, y);
     case "/":
       return divide(x, y);
@@ -33,8 +33,6 @@ let operator2 = null;
 let operand = null;
 // When DOM is loaded...
 document.addEventListener("DOMContentLoaded", () => {
-  const container = document.querySelector("#container");
-  const calculator = document.querySelector("#calculator");
   const display = document.querySelector("#display");
   const buttons = document.querySelector("#buttons");
 
@@ -46,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "7",
     "8",
     "9",
-    "*",
+    "x",
     "4",
     "5",
     "6",
@@ -66,6 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (label === "0") {
       btn.classList.add("zero-btn");
+    }
+
+    if (["AC", "+/-", "%"].includes(label)) {
+      btn.classList.add("gray-btn");
+    } else if (["/", "x", "-", "+", "="].includes(label)) {
+      btn.classList.add("orange-btn");
     }
 
     btn.addEventListener("click", () => {
@@ -109,8 +113,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     buttons.appendChild(btn);
   });
-
-  //   calculator.appendChild(display);
-  //   calculator.appendChild(buttonsContainer);
-  //   container.appendChild(calculator);
 });
