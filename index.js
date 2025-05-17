@@ -28,10 +28,9 @@ function divide(x, y) {
   return x / y;
 }
 
-let operator1 = null;
-let operator2 = null;
-let operand = null;
-// When DOM is loaded...
+let num1 = null;
+let num2 = null;
+let operator = null;
 document.addEventListener("DOMContentLoaded", () => {
   const display = document.querySelector("#display");
   const buttons = document.querySelector("#buttons");
@@ -62,10 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.createElement("button");
     btn.textContent = label;
 
+    // Add classes for unique styling
     if (label === "0") {
       btn.classList.add("zero-btn");
     }
-
     if (["AC", "+/-", "%"].includes(label)) {
       btn.classList.add("gray-btn");
     } else if (["/", "x", "-", "+", "="].includes(label)) {
@@ -74,19 +73,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     btn.addEventListener("click", () => {
       if (!isNaN(label)) {
-        display.value += label;
+        // If operator was pressed, update display with new result
+        if (operator !== null && display.value === num1.toString()) {
+          display.value = label;
+        } else {
+          display.value += label;
+        }
       } else if (label === "AC") {
         display.value = "";
-        operand = null;
-        operator1 = null;
-        operator2 = null;
+        operator = null;
+        num1 = null;
+        num2 = null;
       } else if (label === "=") {
-        if (operator1 !== null && operand !== null) {
-          operator2 = parseFloat(display.value);
-          const result = operate(operator1, operand, operator2);
+        if (num1 !== null && operator !== null) {
+          num2 = parseFloat(display.value);
+          const result = operate(num1, operator, num2);
           display.value = result;
-          operator1 = result;
-          operand = null;
+          num1 = result; // new num1 and reset operator, num2
+          operator = null;
+          num2 = null;
         }
       } else if (label === "+/-") {
         if (display.value !== "") {
@@ -101,14 +106,19 @@ document.addEventListener("DOMContentLoaded", () => {
           display.value += ".";
         }
       } else {
-        if (display.value !== "") {
-          // Value in display becomes operator1
-          operator1 = parseFloat(display.value);
-          // When operand is clicked (+,-,*,/)
-          operand = label;
-          // Clear display for next operator2
-          display.value = "";
+        // Handle operator buttons (+, -, x, /)
+        // If no previous number is stored, save the current display value as num1
+        if (num1 === null) {
+          num1 = parseFloat(display.value);
+          // If an operator is already set, calculate the result of the previous operation
+        } else if (operator !== null) {
+          num2 = parseFloat(display.value);
+          const result = operate(num1, operator, num2);
+          display.value = result;
+          num1 = result; // Store the result for further calculations
         }
+        // Save next new operator for next calculation
+        operator = label;
       }
     });
     buttons.appendChild(btn);

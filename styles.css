@@ -4,7 +4,7 @@ body {
   align-items: center;
   margin: 0;
   height: 100vh;
-  background-color: #cdbfaf;
+  background-color: #ccc1b5;
 }
 
 #calculator {
@@ -42,7 +42,7 @@ body {
   font-size: 36px;
   text-align: center;
   height: 80px;
-  border-radius: 40px;
+  border-radius: 50px;
   border: none;
 }
 
@@ -56,7 +56,7 @@ body {
 
 #buttons .zero-btn {
   grid-column: span 2; /* Make the 0 button span 2 columns */
-  border-radius: 40px;
+  border-radius: 50px;
 }
 
 #buttons .gray-btn {
