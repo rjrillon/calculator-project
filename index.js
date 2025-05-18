@@ -87,11 +87,17 @@ document.addEventListener("DOMContentLoaded", () => {
       } else if (label === "=") {
         if (num1 !== null && operator !== null) {
           num2 = parseFloat(display.value);
-          const result = operate(num1, operator, num2);
-          display.value = result;
-          num1 = result; // new num1 and reset operator, num2
-          operator = null;
-          num2 = null;
+
+          if (isNaN(num2) || display.value === num1.toString()) {
+            operator = null;
+            display.value = num1.toString();
+          } else {
+            const result = operate(num1, operator, num2);
+            display.value = result;
+            num1 = result; // new num1 and reset operator, num2
+            operator = null;
+            num2 = null;
+          }
         }
       } else if (label === "+/-") {
         if (display.value !== "") {
