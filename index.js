@@ -119,12 +119,17 @@ document.addEventListener("DOMContentLoaded", () => {
         // If no previous number is stored, save the current display value as num1
         if (num1 === null) {
           num1 = parseFloat(display.value);
-          // If an operator is already set, calculate the result of the previous operation
+          // If an operator is already set but no new number is entered, do nothing
+          // This prevents treating the current display value as num2
+        } else if (operator !== null && num2 === null) {
+          return;
+          // If an operator is already set and a new number is entered, calculate the result
         } else if (operator !== null) {
           num2 = parseFloat(display.value);
           const result = operate(num1, operator, num2);
           display.value = result;
           num1 = result; // Store the result for further calculations
+          num2 = null; // reset num2 for next input
         }
         // Save next new operator for next calculation
         operator = label;
