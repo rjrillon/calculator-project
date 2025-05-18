@@ -8,6 +8,8 @@ function operate(x, op, y) {
       return multiply(x, y);
     case "/":
       return divide(x, y);
+    default:
+      return NaN; //for unexpected results.
   }
 }
 
@@ -22,8 +24,8 @@ function multiply(x, y) {
   return x * y;
 }
 function divide(x, y) {
-  if (x === 0 || y === 0) {
-    throw new Error("error cant divide by 0");
+  if (y === 0) {
+    return "lmao";
   }
   return x / y;
 }
@@ -89,9 +91,16 @@ document.addEventListener("DOMContentLoaded", () => {
           num2 = parseFloat(display.value);
           const result = operate(num1, operator, num2);
           display.value = result;
-          num1 = result; // new num1 and reset operator, num2
-          operator = null;
-          num2 = null;
+
+          if (result === "lmao") {
+            num1 = null;
+            num2 = null;
+            operator = null;
+          } else {
+            num1 = result; // new num1 and reset operator, num2
+            operator = null;
+            num2 = null;
+          }
         }
       } else if (label === "+/-") {
         if (display.value !== "") {
