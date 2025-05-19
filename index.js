@@ -68,7 +68,10 @@ function handleInput(label) {
       display.value = (parseFloat(display.value) / 100).toString();
     }
   } else if (label === ".") {
-    if (!display.value.includes(".")) {
+    // Handles same decimal number scenario
+    if (display.value === "" || (operator !== null && display.value === num1.toString())) {
+      display.value = "0.";
+    } else if (!display.value.includes(".")) {
       display.value += ".";
     }
   } else {
